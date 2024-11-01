@@ -3,11 +3,18 @@ import java.util.List;
 import java.util.Scanner;
 
 public class LostAndFoundSystem {
-    private static List<LostItem> items = new ArrayList<>();
-    private static User currentUser = null;
-    private static Scanner input = new Scanner(System.in);
+    private List<LostItem> items = new ArrayList<>();
+    private User currentUser = null;
+    private Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {// 登录逻辑
+        System.out.println("失物招领系统");
+        LostAndFoundSystem driver = new LostAndFoundSystem();
+        driver.setup();
+        driver.printMenu();
+    }
+
+    private void setup(){
         System.out.print("请输入用户名: ");
         String username = input.nextLine();
         System.out.print("请选择身份 (user/admin): ");
@@ -40,7 +47,7 @@ public class LostAndFoundSystem {
         input.close();
     }
 
-    private static void printMenu() {// 打印菜单
+    private void printMenu() {// 打印菜单
         System.out.println("失物招领系统");
         if (currentUser.getRole() == User.Role.ADMIN) {
             System.out.println("1. 添加物品");
@@ -59,7 +66,7 @@ public class LostAndFoundSystem {
         System.out.print("请选择操作: ");
     }
 
-    private static void handleChoice(int choice) {// 根据选择执行操作
+    private void handleChoice(int choice) {// 根据选择执行操作
         switch (choice) {
             case 1:
                 addItem();
@@ -89,7 +96,7 @@ public class LostAndFoundSystem {
         }
     }
 
-    private static void addItem() {// 添加物品
+    private void addItem() {// 添加物品
         System.out.print("请输入物品名称: ");
         String name = input.nextLine();
         System.out.print("请输入物品描述: ");
@@ -100,7 +107,10 @@ public class LostAndFoundSystem {
         String lostPlace = input.nextLine();
         System.out.print("是否有可辨识物主身份信息(yes/no): ");
         String whetherHavePersonalID = input.nextLine();
-        String RCode = RandomCode.generateRandomCode();
+
+        RandomCode randomCodeGenerator = new RandomCode();
+        String RCode = randomCodeGenerator.generateRandomCode();
+
         if (whetherHavePersonalID.equalsIgnoreCase("yes")) {
             System.out.print("请输入可辨识物主身份信息: ");
             String identifiableInfo = input.nextLine();
@@ -114,7 +124,7 @@ public class LostAndFoundSystem {
     }
 
 
-    private static void listItemsForAdmin() {// 列出所有物品（管理员视图）
+    private void listItemsForAdmin() {// 列出所有物品（管理员视图）
         System.out.println("所有物品（管理员视图）:");
         int i = 1;
         for (LostItem item : items) {
@@ -126,7 +136,7 @@ public class LostAndFoundSystem {
         }
     }
 
-    private static void listItemsForUser() {// 列出所有物品（用户视图）
+    private void listItemsForUser() {// 列出所有物品（用户视图）
         System.out.println("所有物品（用户视图）:");
         int i = 1;
         for (LostItem item : items) {
@@ -137,7 +147,7 @@ public class LostAndFoundSystem {
         }
     }
 
-    private static void claimItem() {// 认领物品
+    private void claimItem() {// 认领物品
         System.out.print("请输入要认领物品的唯一编码: ");
         String rCode = input.nextLine();
         for (int i = 0; i < items.size(); i++) {
@@ -150,7 +160,7 @@ public class LostAndFoundSystem {
         System.out.println("未找到该物品。");
     }
 
-    private static void changeRole() {// 切换身份
+    private void changeRole() {// 切换身份
         System.out.print("请选择新身份(user/admin): ");
         String roleInput = input.nextLine().toLowerCase();
         if (roleInput.equals("admin")){

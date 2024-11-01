@@ -1,11 +1,11 @@
 import java.util.Random;
 
 public class RandomCode {
-    private static final String CHARACTERS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private static final int LENGTH = 6;
-    private static final Random RANDOM = new Random();
+    private final String CHARACTERS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private final int LENGTH = 6;
+    private final Random RANDOM = new Random();
 
-    public static String generateRandomCode(){
+    public String generateRandomCode(){
         StringBuilder code = new StringBuilder(LENGTH);
 
         boolean have123 = false;
