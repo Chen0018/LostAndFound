@@ -5,16 +5,16 @@ import java.util.Scanner;
 public class LostAndFoundSystem {
     private static List<LostItem> items = new ArrayList<>();
     private static User currentUser = null;
-    private static Scanner scanner = new Scanner(System.in);
+    private static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {// 登录逻辑
         System.out.print("请输入用户名: ");
-        String username = scanner.nextLine();
+        String username = input.nextLine();
         System.out.print("请选择身份 (user/admin): ");
-        String roleInput = scanner.nextLine().toLowerCase();
+        String roleInput = input.nextLine();
         if (roleInput.equals("admin")){
             System.out.println("请输入管理员密码");
-            String password = scanner.nextLine();
+            String password = input.nextLine();
             if (!password.equals("admin")){
                 System.out.println("密码错误，请重试。");
                 return;
@@ -32,12 +32,12 @@ public class LostAndFoundSystem {
         boolean running = true;
         while (running) {
             printMenu();
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            int choice = input.nextInt();
+            input.nextLine();
             handleChoice(choice);
         }
 
-        scanner.close();
+        input.close();
     }
 
     private static void printMenu() {// 打印菜单
@@ -91,19 +91,19 @@ public class LostAndFoundSystem {
 
     private static void addItem() {// 添加物品
         System.out.print("请输入物品名称: ");
-        String name = scanner.nextLine();
+        String name = input.nextLine();
         System.out.print("请输入物品描述: ");
-        String description = scanner.nextLine();
+        String description = input.nextLine();
         System.out.print("请输入丢失日期(yyyy/mm/dd): ");
-        String lostDate = scanner.nextLine();
+        String lostDate = input.nextLine();
         System.out.print("请输入丢失地点: ");
-        String lostPlace = scanner.nextLine();
+        String lostPlace = input.nextLine();
         System.out.print("是否有可辨识物主身份信息(yes/no): ");
-        String whetherHavePersonalID = scanner.nextLine();
+        String whetherHavePersonalID = input.nextLine();
         String RCode = RandomCode.generateRandomCode();
         if (whetherHavePersonalID.equalsIgnoreCase("yes")) {
             System.out.print("请输入可辨识物主身份信息: ");
-            String identifiableInfo = scanner.nextLine();
+            String identifiableInfo = input.nextLine();
             items.add(new LostItem(name, description, lostDate, lostPlace, whetherHavePersonalID, identifiableInfo, RCode));
             System.out.println("物品已添加成功。");
         } else {
@@ -118,7 +118,7 @@ public class LostAndFoundSystem {
         System.out.println("所有物品（管理员视图）:");
         int i = 1;
         for (LostItem item : items) {
-            System.out.println("["+i+"]"+" 上传者： "+ currentUser.getUsername()+" 物品唯一编号 "+item.getRCode()
+            System.out.println("["+i+"]"+" 上传者： "+ currentUser.getUsername()+" 物品唯一编号 "+item.getRandomCode()
                     +" 物品名称: "+item.getName()+" 物品描述: "+item.getDescription()
                     +" 丢失日期: "+item.getLostDate()+" 丢失地点: "+item.getLostPlace()
                     +" 物主身份信息: "+item.getIdentifiableInfo());//保护隐私
@@ -130,7 +130,7 @@ public class LostAndFoundSystem {
         System.out.println("所有物品（用户视图）:");
         int i = 1;
         for (LostItem item : items) {
-            System.out.println("["+i+"]"+" 物品唯一编号: "+item.getRCode()
+            System.out.println("["+i+"]"+" 物品唯一编号: "+item.getRandomCode()
                     +" 物品名称: "+item.getName()+" 物品描述: "+item.getDescription()
                     +" 丢失日期: "+item.getLostDate()+" 丢失地点: "+item.getLostPlace());
             i++;
@@ -139,9 +139,9 @@ public class LostAndFoundSystem {
 
     private static void claimItem() {// 认领物品
         System.out.print("请输入要认领物品的唯一编码: ");
-        String rCode = scanner.nextLine();
+        String rCode = input.nextLine();
         for (int i = 0; i < items.size(); i++) {
-            if (items.get(i).getRCode().equals(rCode)) {
+            if (items.get(i).getRandomCode().equals(rCode)) {
                 items.remove(i);
                 System.out.println("物品已认领成功。");
                 return;
@@ -152,10 +152,10 @@ public class LostAndFoundSystem {
 
     private static void changeRole() {// 切换身份
         System.out.print("请选择新身份(user/admin): ");
-        String roleInput = scanner.nextLine().toLowerCase();
+        String roleInput = input.nextLine().toLowerCase();
         if (roleInput.equals("admin")){
             System.out.println("请输入管理员密码");
-            String password = scanner.nextLine();
+            String password = input.nextLine();
             if (!password.equals("admin")){
                 System.out.println("密码错误，请重试。");
                 return;

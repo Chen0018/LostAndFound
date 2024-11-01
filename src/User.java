@@ -19,7 +19,24 @@ class User {
         this.role = role;
     }
 
-    public enum Role {
-        ADMIN, USER
+    public static class Role {
+        public static final Role ADMIN = new Role("ADMIN");
+        public static final Role USER = new Role("USER");
+
+        private final String name;
+
+        private Role(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
     }
+
 }

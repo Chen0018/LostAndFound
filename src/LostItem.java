@@ -5,20 +5,16 @@ public class LostItem {
     private String lostPlace;
     private String whetherHavePersonalID;
     private String identifiableInfo;
-    private String RCode;
+    private String randomCode;
 
-    public LostItem(String name, String description, String lostDate, String lostPlace, String whetherHavePersonalID, String identifiableInfo, String RCode) {
+    public LostItem(String name, String description, String lostDate, String lostPlace, String whetherHavePersonalID, String identifiableInfo, String randomCode) {
         this.name = name;
         this.description = description;
         this.lostDate = lostDate;
         this.lostPlace = lostPlace;
         this.whetherHavePersonalID = whetherHavePersonalID;
         this.identifiableInfo = identifiableInfo;
-        this.RCode = RCode;
-    }
-
-    public LostItem(String name, String description, String lostDate, String lostPlace, String whetherHavePersonalID ,String RCode) {
-        this(name, description, lostDate, lostPlace, whetherHavePersonalID, RCode, "");
+        this.randomCode = randomCode;
     }
 
     // Getters and Setters
@@ -46,8 +42,8 @@ public class LostItem {
         return identifiableInfo;
     }
 
-    public String getRCode(){
-        return RCode;
+    public String getRandomCode(){
+        return randomCode;
     }
 
     @Override

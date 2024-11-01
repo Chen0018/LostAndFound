@@ -22,6 +22,7 @@ public class RandomCode {
                 haveABC = true;
             }
         }
+
         while (!(have123&&haveABC)){
             code.setLength(0);
             have123 = false;
