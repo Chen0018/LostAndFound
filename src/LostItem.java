@@ -5,19 +5,16 @@ public class LostItem {
     private String lostPlace;
     private String whetherHavePersonalID;
     private String identifiableInfo;
-    private String randomCode;
 
-    public LostItem(String name, String description, String lostDate, String lostPlace, String whetherHavePersonalID, String identifiableInfo, String randomCode) {
+    public LostItem(String name, String description, String lostDate, String lostPlace, String whetherHavePersonalID, String identifiableInfo) {
         this.name = name;
         this.description = description;
         this.lostDate = lostDate;
         this.lostPlace = lostPlace;
         this.whetherHavePersonalID = whetherHavePersonalID;
         this.identifiableInfo = identifiableInfo;
-        this.randomCode = randomCode;
     }
 
-    // Getters and Setters
     public String getName() {
         return name;
     }
@@ -34,27 +31,7 @@ public class LostItem {
         return lostPlace;
     }
 
-    public String getWhetherHavePersonalID() {
-        return whetherHavePersonalID;
-    }
-
     public String getIdentifiableInfo() {
         return identifiableInfo;
-    }
-
-    public String getRandomCode(){
-        return randomCode;
-    }
-
-    @Override
-    public String toString() {
-        return "LostItem{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", lostDate='" + lostDate + '\'' +
-                ", lostPlace='" + lostPlace + '\'' +
-                ", whetherHavePersonalID='" + whetherHavePersonalID + '\'' +
-                ", identifiableInfo='" + identifiableInfo + '\'' +
-                '}';
     }
 }
